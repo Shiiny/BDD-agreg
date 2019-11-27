@@ -14,6 +14,7 @@ class TeacherType extends AbstractType
         $builder
             ->add('lastname')
             ->add('firstname')
+            ->add('idMoodle')
             ->add('email')
             ->add('phone')
         ;
@@ -23,6 +24,7 @@ class TeacherType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Teacher::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

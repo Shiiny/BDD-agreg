@@ -96,7 +96,12 @@
       <DataType>DATETIME|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="27" parent="9">
+    <column id="27" parent="9" name="id_moodle">
+      <Position>7</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="28" parent="9">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

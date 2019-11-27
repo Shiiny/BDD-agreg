@@ -41,6 +41,11 @@ class Teacher
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_moodle;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -107,6 +112,18 @@ class Teacher
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getIdMoodle(): ?int
+    {
+        return $this->id_moodle;
+    }
+
+    public function setIdMoodle(int $id_moodle): self
+    {
+        $this->id_moodle = $id_moodle;
 
         return $this;
     }
