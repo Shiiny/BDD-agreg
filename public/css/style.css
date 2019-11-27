@@ -8,6 +8,11 @@
     }
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     background: #DEDEDE;
     margin: 0;
@@ -27,4 +32,48 @@ header img {
     width: 217px;
 }
 
+.card-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
 
+.card-head-user {
+    height: 90px;
+    width: 90px;
+    background: #C4C4C4;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.card-head-tag {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-family: "Roboto Regular", serif;
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.card-head-tag:first-child {
+    margin-right: 15px;
+}
+
+.tag-geo {
+    background-color: #404894;
+}
+.tag-hist {
+    background-color: #7C3B9B;
+}
+
+.card-head ul {
+    list-style: none;
+    text-align: center;
+    font-family: "Roboto Light", serif;
+}

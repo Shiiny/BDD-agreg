@@ -20,9 +20,9 @@
             </ul>
         </div>-->
 
-        <h1>Les Enseingnants</h1>
+        <h1>Les Enseignants</h1>
 
-        <form action="" method="GET">
+        <!--<form action="" method="GET">
             <div class="input-group">
                 <input type="text" name="param" class="form-control" placeholder="Rechercher un enseignant">
                 <div class="input-group-append">
@@ -31,6 +31,24 @@
                     </button>
                 </div>
             </div>
-        </form>
+        </form>-->
+        <div class="row">
+            {% include 'bdd/components/card_teacher.html.twig' %}
+            <div class="col-lg-4" id="CS_Formation" style="opacity: 0">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Agrégation externe de Géographie</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" id="CS_Cours">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Culture, médias et pouvoir...</h1>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 {% endblock %}
