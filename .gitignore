@@ -15,7 +15,3 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /.idea/
-<<<<<<< HEAD
-=======
-.idea/workspace.xml
->>>>>>> 65193fdf9353c6349310c307ca002ea2914f2843
