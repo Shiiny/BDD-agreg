@@ -25,16 +25,8 @@ class BddController extends AbstractController
      */
     public function index()
     {
-        /*$teacher = new Teacher();
-        $teacher->setFirstname('Bertrand')
-            ->setLastname('Pleven')
-            ->setEmail('test@test.fr')
-            ->setPhone('0612345678');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($teacher);
-        $em->flush();*/
 
-        $teacher = $this->teacher_repo->find(3);
+        $teacher = $this->teacher_repo->find(6);
         dump($teacher);
 
         return $this->render('bdd/index.html.twig', [

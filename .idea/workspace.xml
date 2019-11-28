@@ -2,21 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae772020-5ef5-4e00-b73a-2c64ce322c21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/Admin/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/TeacherType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bdd/admin/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bdd/admin/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bdd/components/card_teacher.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bdd/admin/create.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bdd/components/form_admin.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/translations/forms.fr.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/var/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/75f7b4ee-8df2-473e-abe2-d23d09c0b968.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/75f7b4ee-8df2-473e-abe2-d23d09c0b968.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/translation.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/translation.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BddController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Teacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191123134007.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20191127092604.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/bdd/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bdd/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/TeacherType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/TeacherType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191127092604.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20191127152324.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bdd/admin/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bdd/admin/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bdd/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bdd/admin/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bdd/components/card_teacher.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bdd/components/card_teacher.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -190,9 +191,11 @@
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SELECT_t___FROM_teacher_t.tsv" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -218,7 +221,12 @@
       <updated>1574433254613</updated>
       <workItem from="1574433255818" duration="11612000" />
       <workItem from="1574780976682" duration="8683000" />
+<<<<<<< HEAD
+      <workItem from="1574844791424" duration="8561000" />
+=======
       <workItem from="1574844791424" duration="7432000" />
+      <workItem from="1574865032595" duration="15820000" />
+>>>>>>> 65193fdf9353c6349310c307ca002ea2914f2843
     </task>
     <servers />
   </component>

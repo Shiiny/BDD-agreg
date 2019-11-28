@@ -4,7 +4,8 @@
 /.env.local.php
 /.env.*.local
 /public/bundles/
-/var/
+/var/cache
+/var/log
 /vendor/
 ###< symfony/framework-bundle ###
 
@@ -13,3 +14,8 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+/.idea/
+<<<<<<< HEAD
+=======
+.idea/workspace.xml
+>>>>>>> 65193fdf9353c6349310c307ca002ea2914f2843

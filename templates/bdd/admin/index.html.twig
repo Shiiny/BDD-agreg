@@ -3,29 +3,37 @@
 {% block title 'Admin' %}
 
 {% block body %}
-    <div class="container">
-            <h1>Gérer les enseignants</h1>
+    <div class="container mt-4">
+
         <div class="card">
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for teacher in teachers %}
+            <div class="card-body">
+                <h1>Gérer les enseignants</h1>
+                <div class="text-right mb-3">
+                    <a href="{{ path('admin.teacher.create') }}" class="btn btn-secondary">Ajouter</a>
+                </div>
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
-                        <td>
-                            <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="btn btn-primary">Editer</a>
-                        </td>
+                        <th>Nom</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
+                    </thead>
+                    <tbody>
+                    {% for teacher in teachers %}
+                        <tr>
+                            <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
+                            <td>
+                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="btn btn-primary">Editer</a>
+                                <form action="{{ path('admin.teacher.delete', {id: teacher.id}) }}" >
+                                    <input type="hidden" name="method" value="DELETE">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         
