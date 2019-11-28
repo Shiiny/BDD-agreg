@@ -26,11 +26,11 @@ class BddController extends AbstractController
     public function index()
     {
 
-        $teacher = $this->teacher_repo->find(6);
+        $teacher = $this->teacher_repo->find(156);
         dump($teacher);
 
-        return $this->render('bdd/index.html.twig', [
-            'teachers' => $teacher,
+        return $this->render('bdd/home.html.twig', [
+            'teacher' => $teacher,
         ]);
     }
 }

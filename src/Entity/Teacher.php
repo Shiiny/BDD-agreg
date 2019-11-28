@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeacherRepository")
+ * @UniqueEntity(fields={"id_moodle"}, message="Cet id_moodle est déjà utilisé")
  */
 class Teacher
 {
@@ -17,16 +23,19 @@ class Teacher
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     * @Assert\Email(message="l'E-mail '{{ value }}' n'est pas valide")
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -46,9 +55,21 @@ class Teacher
      */
     private $id_moodle;
 
+   /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="teachers")
+     */
+    private $discipline;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cours", mappedBy="teachers")
+     */
+    private $cours;
+
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->cours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,6 +145,50 @@ class Teacher
     public function setIdMoodle(int $id_moodle): self
     {
         $this->id_moodle = $id_moodle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+
+    public function getDiscipline(): ?Discipline
+    {
+        return $this->discipline;
+    }
+
+    public function setDiscipline(?Discipline $discipline): self
+    {
+        $this->discipline = $discipline;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->cours->contains($cour)) {
+            $this->cours[] = $cour;
+            $cour->addTeacher($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->cours->contains($cour)) {
+            $this->cours->removeElement($cour);
+            $cour->removeTeacher($this);
+        }
 
         return $this;
     }
