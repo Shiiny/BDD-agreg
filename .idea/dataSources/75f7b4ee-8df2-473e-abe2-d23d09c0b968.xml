@@ -62,7 +62,6 @@
       <NameSurrogate>1</NameSurrogate>
       <ColNames>cours_id
 teacher_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="23" parent="7">
@@ -120,7 +119,6 @@ teacher_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ColNames>formation_id
 cours_id</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="34" parent="10">
@@ -142,7 +140,6 @@ cours_id</ColNames>
     <index id="37" parent="11" name="sqlite_autoindex_migration_versions_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>version</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="38" parent="11">
