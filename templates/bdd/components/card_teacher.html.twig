@@ -1,16 +1,17 @@
-
-    <div class="col-lg-4" id="CS_Enseignant">
+{% if teacher is defined %}
+   <div class="col-lg-4" id="CS_Enseignant">
         <div class="card">
             <div class="card-head">
                 <div class="card-head-user"><i class="fas fa-user"></i></div>
-                <h1>{{ teachers.firstname }} {{ teachers.lastname }}</h1>
+                <h1>{{ teacher.firstname }} {{ teacher.lastname }}</h1>
                 <div class="card-head-discipline">
-                    <span class="card-head-tag tag-geo">Géographie</span>
-                    <span class="card-head-tag tag-hist">Histoire</span>
+                    {% if teacher.discipline is not null %}
+                    <span class="card-head-tag tag-geo">{{ teacher.discipline.title }}</span>
+                    {% endif %}
                 </div>
                 <ul>
-                    <li>Tél : {{ teachers.phone }}</li>
-                    <li>Email : {{ teachers.email }}</li>
+                    <li>Tél : {{ teacher.phone }}</li>
+                    <li>Email : {{ teacher.email }}</li>
                 </ul>
             </div>
             <div class="card-body">
@@ -35,4 +36,5 @@
             </div>
         </div>
     </div>
+{% endif %}
 

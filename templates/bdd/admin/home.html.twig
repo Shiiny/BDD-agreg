@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Admin' %}
+
+{% block body %}
+    <div class="container mt-4">
+        {% for label, messages in app.flashes() %}
+            {% for message in messages %}
+                <div id="flash" class="alert alert-{{ label }}" role="alert">
+                    <p class="message">Message flash : {{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-4">
+                    <h1>Gérer les enseignants</h1>
+                    <div class="text-right mb-3">
+                        <a href="{{ path('admin.teacher.index') }}" class="btn btn-secondary">Voir tout</a>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for teacher in teachers %}
+                            <tr>
+                                <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
+                                <td>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+{% endblock %}

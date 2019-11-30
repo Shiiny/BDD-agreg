@@ -3,35 +3,43 @@
 {% block title %}Hello BddController!{% endblock %}
 
 {% block body %}
-    <header>
-        <div class="container">
-            <img src="{{ asset('images/logo_agreg.png') }}" alt="">
-        </div>
-    </header>
 
     <div class="container">
-        <!--<div class="example-wrapper">
-            <h1>Hello </h1>
+        <div class="row mt-4 mb-4">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Les Enseignants</h1>
 
-            This friendly message is coming from:
-            <ul>
-                <li>Your controller at <code><a href="{{ 'C:/Users/Mr Oury/Documents/PERSO/Datas/bdd_agreg/src/Controller/BddController.php'|file_link(0) }}">src/Controller/BddController.php</a></code></li>
-                <li>Your template at <code><a href="{{ 'C:/Users/Mr Oury/Documents/PERSO/Datas/bdd_agreg/templates/bdd/index.html.twig'|file_link(0) }}">templates/bdd/index.html.twig</a></code></li>
-            </ul>
-        </div>-->
-
-        <h1>Les Enseignants</h1>
-
-        <!--<form action="" method="GET">
-            <div class="input-group">
-                <input type="text" name="param" class="form-control" placeholder="Rechercher un enseignant">
-                <div class="input-group-append">
-                    <button type="submit" class="input-group-text" id="basic-addon">
-                        <i class="fas fa-search"></i>
-                    </button>
+                        {{ form_start(form) }}
+                        <div class="input-group">
+                            {{ form_widget(form.teacher) }}
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text" id="basic-addon">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
-        </form>-->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        {{ form_start(formCours) }}
+
+                        {{ form_end(formCours) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
         <div class="row">
             {% include 'bdd/components/card_teacher.html.twig' %}
             <div class="col-lg-4" id="CS_Formation" style="opacity: 0">

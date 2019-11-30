@@ -4,7 +4,13 @@
 
 {% block body %}
     <div class="container mt-4">
-
+        {% for label, messages in app.flashes() %}
+            {% for message in messages %}
+                <div id="flash" class="alert alert-{{ label }}" role="alert">
+                    <p class="message">Message flash : {{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
         <div class="card">
             <div class="card-body">
                 <h1>Gérer les enseignants</h1>
@@ -24,8 +30,9 @@
                             <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
                             <td>
                                 <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="btn btn-primary">Editer</a>
-                                <form action="{{ path('admin.teacher.delete', {id: teacher.id}) }}" >
-                                    <input type="hidden" name="method" value="DELETE">
+                                <form method="post" action="{{ path('admin.teacher.delete', {id: teacher.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ teacher.id) }}">
                                     <button class="btn btn-danger">Supprimer</button>
                                 </form>
                             </td>

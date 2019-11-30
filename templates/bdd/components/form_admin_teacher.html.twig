@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.idMoodle) }}
+    {{ form_row(form.discipline) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+    <button class="btn btn-primary">{{ button|default('Ajouter') }}</button>
+{{ form_rest(form) }}
+{{ form_end(form) }}
