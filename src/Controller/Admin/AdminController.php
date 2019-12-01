@@ -10,27 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin")
+ */
 class AdminController extends AbstractController
 {
-    /**
-     * @var TeacherRepository
-     */
-    private $teacher_repo;
-
-
-    public function __construct(TeacherRepository $teacher_repo)
-    {
-        $this->teacher_repo = $teacher_repo;
-    }
-
 
     /**
-     * @Route("/admin", name="admin.index")
+     * @Route("/", name="admin.index")
+     * @param TeacherRepository $teacherRepository
+     * @return Response
      */
-    public function index()
+    public function index(TeacherRepository $teacherRepository): Response
     {
-        $teachers = $this->teacher_repo->findByLimite(10);
-        return $this->render('bdd/admin/home.html.twig', compact('teachers'));
+        return $this->render('bdd/admin/home.html.twig', [
+            'teachers' => $teacherRepository->findByLimite(10)
+        ]);
     }
 
 }

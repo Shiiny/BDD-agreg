@@ -13,26 +13,28 @@
         {% endfor %}
         <div class="card">
             <div class="card-body">
-                <h1>Gérer les enseignants</h1>
+                <h1>Gérer les cours</h1>
                 <div class="text-right mb-3">
-                    <a href="{{ path('admin.teacher.new') }}" class="btn btn-secondary">Ajouter</a>
+                    <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
                 </div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Nom</th>
+                        <th>Enseignant</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for teacher in teachers %}
+                    {% for cour in cours %}
                         <tr>
-                            <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
+                            <td>{{ cour.title }}</td>
+                            <td></td>
                             <td>
-                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="btn btn-primary">Editer</a>
-                                <form method="post" action="{{ path('admin.teacher.delete', {id: teacher.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+                                <a href="{{ path('admin.cours.edit', {id:cour.id}) }}" class="btn btn-primary">Editer</a>
+                                <form method="post" action="{{ path('admin.cours.delete', {id: cour.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ teacher.id) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
                                     <button class="btn btn-danger">Supprimer</button>
                                 </form>
                             </td>

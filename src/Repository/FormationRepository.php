@@ -19,6 +19,7 @@ class FormationRepository extends ServiceEntityRepository
         parent::__construct($registry, Formation::class);
     }
 
+
     // /**
     //  * @return Formation[] Returns an array of Formation objects
     //  */

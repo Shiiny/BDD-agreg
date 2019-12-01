@@ -4,58 +4,113 @@ namespace App\Controller;
 
 use App\Entity\BddSearch;
 use App\Entity\Cours;
+use App\Entity\Formation;
 use App\Entity\Teacher;
-use App\Form\BddSearchType;
+use App\Form\CoursSearchType;
+use App\Form\TeacherSearchType;
 use App\Form\CoursType;
+use App\Form\SelectFormationType;
+use App\Repository\CoursRepository;
+use App\Repository\FormationRepository;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BddController extends AbstractController
 {
+
     /**
      * @var TeacherRepository
      */
-    private $teacher_repo;
+    private $teacher_repository;
+    /**
+     * @var FormationRepository
+     */
+    private $formationRepository;
+    /**
+     * @var CoursRepository
+     */
+    private $coursRepository;
 
-    public function __construct(TeacherRepository $teacher_repo)
+    public function __construct(TeacherRepository $teacher_repository, FormationRepository $formationRepository, CoursRepository $coursRepository)
     {
-        $this->teacher_repo = $teacher_repo;
+        $this->teacher_repository = $teacher_repository;
+        $this->formationRepository = $formationRepository;
+        $this->coursRepository = $coursRepository;
     }
 
 
     /**
      * @Route("/", name="bdd")
      * @Route("/search/{param}", name="bdd.search.teacher")
-     *
+     * @param Request $request
+     * @param CoursRepository $coursRepository
+     * @param FormationRepository $formationRepository
+     * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $search = new BddSearch();
-        $cours = new Cours();
 
-        $form = $this->createForm(BddSearchType::class, $search);
-        $formCours = $this->createForm(CoursType::class, $cours);
 
-        $form->handleRequest($request);
+        $formTeacher = $this->createForm(TeacherSearchType::class);
+        $formCours = $this->createForm(CoursSearchType::class, $search);
+        $formFormation = $this->createForm(SelectFormationType::class);
+
+
+        $formTeacher->handleRequest($request);
         $formCours->handleRequest($request);
+        $formFormation->handleRequest($request);
 
-
-        if ($form->isSubmitted()) {
-            $teacher = $this->teacher_repo->findByParam($search);
-            dump($teacher);
+        if ($formTeacher->isSubmitted()) {
+            $teacher = $this->teacher_repository->findOneBy(['id'=>$request->get('teacher')]);
+            $subCourses = $this->coursRepository->findByTeacher($teacher);
 
             return $this->render('bdd/index.html.twig', [
+                'formTeacher' => $formTeacher->createView(),
+                'formCours' => $formCours->createView(),
+                'formFormation' => $formFormation->createView(),
                 'teacher' => $teacher,
-                'form' => $form->createView()
+                'subCourses' => $subCourses,
             ]);
         }
 
+        if ($formFormation->isSubmitted()) {
+            $forma = $this->formationRepository->findOneBy(['code'=>$request->get('formation')]);
+            $courses = $this->coursRepository->findAllByFormation($forma);
+
+
+            return $this->render('bdd/index.html.twig', [
+                'formTeacher' => $formTeacher->createView(),
+                'formCours' => $formCours->createView(),
+                'formFormation' => $formFormation->createView(),
+                'courses' => $courses,
+                'forma' => $forma,
+            ]);
+        }
+
+        if ($formCours->isSubmitted()) {
+            //$teacher = $this->teacher_repository->findByParam($search);
+            $allCours = $this->coursRepository->findByTitle($search);
+
+            dump($search, $allCours);
+
+            return $this->render('bdd/index.html.twig', [
+                'formTeacher' => $formTeacher->createView(),
+                'formCours' => $formCours->createView(),
+                'formFormation' => $formFormation->createView(),
+                'search' => $search,
+                //'teacher' => $teacher,
+                'allCours' => $allCours,
+            ]);
+        }
 
         return $this->render('bdd/index.html.twig', [
-            'form' => $form->createView(),
-            'formCours' => $formCours->createView()
+            'formTeacher' => $formTeacher->createView(),
+            'formCours' => $formCours->createView(),
+            'formFormation' => $formFormation->createView()
         ]);
     }
 }

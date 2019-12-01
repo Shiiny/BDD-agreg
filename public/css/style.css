@@ -56,7 +56,6 @@ header img {
     padding: 5px 15px;
     border-radius: 15px;
     font-family: "Roboto Regular", serif;
-    font-size: 12px;
     margin-bottom: 15px;
     color: #fff;
 }
@@ -71,6 +70,25 @@ header img {
 .tag-hist {
     background-color: #7C3B9B;
 }
+.tag-lit {
+    background-color: #558da4;
+}
+.tag-gram {
+    background-color: #66AAC7;
+}
+.tag-math {
+    background-color: #1E651D;
+}
+.tag-lv {
+    background-color: #E96147;
+}
+.tag-ph {
+    background-color: #F874EA;
+}
+.tag-cine {
+    background-color: #BFAE94;
+}
+
 
 .card-head ul {
     list-style: none;

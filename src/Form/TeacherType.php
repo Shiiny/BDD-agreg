@@ -21,7 +21,7 @@ class TeacherType extends AbstractType
             ->add('phone')
             ->add('discipline', EntityType::class, array(
                 'class' => Discipline::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
             ))
         ;
     }

@@ -1,0 +1,28 @@
+{% if courses is defined %}
+    <div class="card">
+        <div class="card-body">
+            <h1>{{ forma.title }}</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cours</th>
+                        <th>Heures</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for cours in courses %}
+                    <tr>
+                        <td></td>
+                        <td>{{ cours.title }}</td>
+                        <td>{{ cours.hours }}</td>
+                        <td><a href="https://moodlecollegesevigne.fr/course/view.php?id={{ cours.idmoodle }}"><i class="fas fa-eye"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endif %}
+

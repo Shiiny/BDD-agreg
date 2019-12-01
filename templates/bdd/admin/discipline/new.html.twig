@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Admin' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Ajouter une discipline</h2>
+                    {{ include ('bdd/components/form_admin_discipline.html.twig') }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

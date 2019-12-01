@@ -10,18 +10,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BddSearchType extends AbstractType
+class CoursSearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('teacher', TextType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'placeholder' => 'Rechercher un enseignant'
-                ]
-            ])
             ->add('cours', TextType::class, [
                 'required' => false,
                 'label' => false,
@@ -29,7 +22,6 @@ class BddSearchType extends AbstractType
                     'placeholder' => 'Rechercher un cours'
                 ]
             ])
-
         ;
     }
 

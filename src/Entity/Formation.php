@@ -29,7 +29,7 @@ class Formation
     private $code;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Cours", inversedBy="formations")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cours", mappedBy="formations")
      */
     private $Courses;
 
