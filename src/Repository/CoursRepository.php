@@ -39,10 +39,8 @@ class CoursRepository extends ServiceEntityRepository
     public function findAllByFormation(Formation $formation)
     {
         return $this->createQueryBuilder('c')
-            ->leftJoin('c.formations', 'f')
-            ->addSelect('f')
-            ->andWhere('f.id = :id')
-            ->setParameter('id', $formation->getId())
+            ->andWhere(':formation MEMBER OF c.formations')
+            ->setParameter('formation', $formation->getId())
             ->getQuery()
             ->getResult()
             ;
