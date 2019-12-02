@@ -9,30 +9,7 @@ class BddSearch
     /**
      * @var string|null
      */
-    private $teacher;
-
-    /**
-     * @var string|null
-     */
     private $cours;
-
-    /**
-     * @return string|null
-     */
-    public function getTeacher(): ?string
-    {
-        return $this->teacher;
-    }
-
-    /**
-     * @param string|null $teacher
-     * @return BddSearch
-     */
-    public function setTeacher(string $teacher): BddSearch
-    {
-        $this->teacher = $teacher;
-        return $this;
-    }
 
     /**
      * @return string|null

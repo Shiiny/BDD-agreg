@@ -54,7 +54,6 @@ class TeacherRepository extends ServiceEntityRepository
      */
     public function findByParam(BddSearch $search)
     {
-
         $sql = 't.firstname LIKE :search 
                 OR t.lastname LIKE :search';
 

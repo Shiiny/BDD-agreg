@@ -11,50 +11,67 @@
                     <div class="card-body">
                         <h1 class="card-title">Les Enseignants</h1>
 
-                        {{ form_start(form) }}
+                        {{ form_start(formTeacher) }}
                         <div class="input-group">
-                            {{ form_widget(form.teacher) }}
+                            {{ form_widget(formTeacher.teacher) }}
                             <div class="input-group-append">
                                 <button type="submit" class="input-group-text" id="basic-addon">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </div>
-                        {{ form_end(form) }}
+                        {{ form_end(formTeacher) }}
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-body">
-
+                        <h1 class="card-title">Les formations</h1>
+                        {{ form_start(formFormation) }}
+                        <div class="input-group">
+                            {{ form_widget(formFormation.formation) }}
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text" id="basic-addon">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{ form_end(formFormation) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Les cours</h1>
                         {{ form_start(formCours) }}
-
+                        <div class="input-group">
+                            {{ form_widget(formCours.cours) }}
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text" id="basic-addon">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                         {{ form_end(formCours) }}
                     </div>
                 </div>
             </div>
-
         </div>
 
 
 
 
         <div class="row">
-            {% include 'bdd/components/card_teacher.html.twig' %}
-            <div class="col-lg-4" id="CS_Formation" style="opacity: 0">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">Agrégation externe de Géographie</h1>
-                    </div>
-                </div>
+            <div class="col-lg-4" id="CS_Enseignant">
+                {% include 'bdd/components/card_teacher.html.twig' %}
+            </div>
+            <div class="col-lg-4" id="CS_Formation">
+                {% include 'bdd/components/card_formation.html.twig' %}
             </div>
             <div class="col-lg-4" id="CS_Cours">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">Culture, médias et pouvoir...</h1>
-                    </div>
-                </div>
+                {% include 'bdd/components/card_cours.html.twig' %}
             </div>
 
         </div>

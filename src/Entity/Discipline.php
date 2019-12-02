@@ -33,6 +33,11 @@ class Discipline
      */
     private $cours;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $code;
+
     public function __construct()
     {
         $this->teachers = new ArrayCollection();
@@ -115,6 +120,18 @@ class Discipline
                 $cour->setDiscipline(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

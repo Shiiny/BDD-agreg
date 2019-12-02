@@ -192,4 +192,10 @@ class Teacher
 
         return $this;
     }
+
+    public function getName()
+    {
+        return $this->lastname.' '.$this->firstname;
+    }
+
 }

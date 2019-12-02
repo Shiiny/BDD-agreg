@@ -29,7 +29,7 @@ class Cours
     private $id_moodle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="Courses")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="Courses")
      */
     private $formations;
 
@@ -42,6 +42,11 @@ class Cours
      * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="cours")
      */
     private $discipline;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $hours;
 
     public function __construct()
     {
@@ -141,6 +146,18 @@ class Cours
     public function setDiscipline(?Discipline $discipline): self
     {
         $this->discipline = $discipline;
+
+        return $this;
+    }
+
+    public function getHours(): ?int
+    {
+        return $this->hours;
+    }
+
+    public function setHours(?int $hours): self
+    {
+        $this->hours = $hours;
 
         return $this;
     }
