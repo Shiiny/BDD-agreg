@@ -34,6 +34,11 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="card-btn">
+                <a onclick="window.open('ms-excel:ofe|u|http://NAS-AGREG/commun/Enseignants_Services/Services_Anglais/{{ teacher.lastname }}_fiche_service.xlsx')"> Open Excel </a>
+
+                <!--<a href="{{ asset('Fiches/Chiari_fiche_service.xlsx') }}" class="btn btn-primary">Voir la fiche</a>-->
+            </div>
         </div>
     </div>
 {% endif %}

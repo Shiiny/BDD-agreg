@@ -44,10 +44,7 @@ class BddController extends AbstractController
 
     /**
      * @Route("/", name="bdd")
-     * @Route("/search/{param}", name="bdd.search.teacher")
      * @param Request $request
-     * @param CoursRepository $coursRepository
-     * @param FormationRepository $formationRepository
      * @return Response
      */
     public function index(Request $request): Response
@@ -68,11 +65,16 @@ class BddController extends AbstractController
             $teacher = $this->teacher_repository->findOneBy(['id'=>$request->get('teacher')]);
             $subCourses = $this->coursRepository->findByTeacher($teacher);
 
+            $path = "\\\NAS-AGREG\\commun\\Enseignants_Services\\Services_Anglais\\";
+            $query = $path . $teacher->getLastname() . "_fiche_service.xlsx";
+
+
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),
                 'formCours' => $formCours->createView(),
                 'formFormation' => $formFormation->createView(),
                 'teacher' => $teacher,
+                'query' => $query,
                 'subCourses' => $subCourses,
             ]);
         }
