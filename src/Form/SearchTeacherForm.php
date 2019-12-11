@@ -4,16 +4,15 @@
 namespace App\Form;
 
 
-use App\Entity\BddSearch;
+use App\Data\SearchData;
 use App\Entity\Teacher;
 use App\Repository\TeacherRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TeacherSearchType extends AbstractType
+class SearchTeacherForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +20,7 @@ class TeacherSearchType extends AbstractType
             ->add('teacher', EntityType::class, [
                 'placeholder' => 'Selectionnez un enseignant',
                 'class' => Teacher::class,
-                'choice_label' => function ($teacher) {
+                'choice_label' => function (Teacher $teacher) {
                     return $teacher->getName();
                 },
                 'query_builder' => function (TeacherRepository $tr) {
@@ -36,6 +35,7 @@ class TeacherSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'data_class' => SearchData::class,
             'method' => 'get',
             'csrf_protection' => false
         ]);

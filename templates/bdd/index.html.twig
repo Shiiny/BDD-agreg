@@ -65,13 +65,13 @@
 
         <div class="row">
             <div class="col-lg-4" id="CS_Enseignant">
-                {% include 'bdd/components/card_teacher.html.twig' %}
+                {% include 'bdd/components/_card_teacher.html.twig' %}
             </div>
-            <div class="col-lg-4" id="CS_Formation">
-                {% include 'bdd/components/card_formation.html.twig' %}
+            <div {% if app.request.get('formation') %}class="col-lg-8"{% else %}class="col-lg-4"{% endif %} id="CS_Formation">
+                {% include 'bdd/components/_card_formation.html.twig' %}
             </div>
             <div class="col-lg-4" id="CS_Cours">
-                {% include 'bdd/components/card_cours.html.twig' %}
+                {% include 'bdd/components/_card_cours.html.twig' %}
             </div>
 
         </div>

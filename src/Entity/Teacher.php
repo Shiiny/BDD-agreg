@@ -193,9 +193,29 @@ class Teacher
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->lastname.' '.$this->firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameFormated()
+    {
+        $partsName = explode(" ", $this->getLastname());
+        if (count($partsName) > 1) {
+            $nameFormated = htmlentities(implode('_',$partsName));
+            $nameFormated = preg_replace( '#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $nameFormated);
+            $nameFormated = preg_replace( '#&([A-za-z]{2})(?:lig);#', '\1', $nameFormated);
+            $nameFormated = preg_replace( '#&[^;]+;#', '', $nameFormated);
+
+            return $nameFormated;
+        }
+        return $this->getLastname();
     }
 
 }

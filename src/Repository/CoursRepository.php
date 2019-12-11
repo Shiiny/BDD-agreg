@@ -2,9 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\BddSearch;
+use App\Data\SearchData;
 use App\Entity\Cours;
-use App\Entity\Formation;
 use App\Entity\Teacher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -32,59 +31,15 @@ class CoursRepository extends ServiceEntityRepository
             ;
     }
 
-    /**
-     * @param Formation $formation
-     * @return mixed
-     */
-    public function findAllByFormation(Formation $formation)
+    public function findSearch(SearchData $search): array
     {
         return $this->createQueryBuilder('c')
-            ->andWhere(':formation MEMBER OF c.formations')
-            ->setParameter('formation', $formation->getId())
+            ->select('c', 't', 'd')
+            ->leftJoin('c.teachers', 't')
+            ->leftJoin('c.discipline', 'd')
+            ->andWhere('c.title LIKE :search')
+            ->setParameter('search', '%' .$search->cours. '%')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
-
-    /**
-     * @param BddSearch $search
-     */
-    public function findByTitle(BddSearch $search): array
-    {
-        return $this->createQueryBuilder('c')
-                ->where('c.title LIKE :search')
-                ->setParameter('search', '%' .$search->getCours(). '%')
-                ->getQuery()
-                ->getResult();
-    }
-
-
-    // /**
-    //  * @return Cours[] Returns an array of Cours objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Cours
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

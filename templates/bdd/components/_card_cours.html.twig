@@ -1,0 +1,27 @@
+{% if courses is defined %}
+    <div class="card">
+        <div class="card-body">
+            <h2>Recherche : <span class="small text-muted">{{ data }}</span></h2>
+            {% for cours in courses %}
+                <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#cours_{{ cours.id }}" aria-expanded="false">{{cours.title}}</button>
+                </p>
+                <div class="collapse multi-collapse mb-3" id="cours_{{ cours.id }}">
+                    <div class="card card-body">
+                        <table class="table table-striped">
+                        {% for teacher in cours.teachers %}
+                            <tr>
+                                <td>
+                                    <a href="#" onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')">{{ teacher.name }}</a>
+                                </td>
+                                <td>{{ cours.hours }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+

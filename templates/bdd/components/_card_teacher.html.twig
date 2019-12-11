@@ -17,25 +17,22 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Cours</th>
-                        <th>Heures</th>
-                        <th>Action</th>
+                        <th style="width: 10%">Heures</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for subCours in subCourses %}
+                {% for cours in teacher.cours %}
                     <tr>
-                        <td></td>
-                        <td>{{ subCours.title }}</td>
-                        <td>{{ subCours.hours }}</td>
-                        <td><a href="https://moodlecollegesevigne.fr/course/view.php?id={{ subCours.idmoodle }}"><i class="fas fa-eye"></i></a></td>
+                        <td><a href="https://moodlecollegesevigne.fr/course/view.php?id={{ cours.idmoodle }}">{{ cours.title }}</a></td>
+                        <td>{{ cours.hours }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
             <div class="card-btn">
-                <a href="#" onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline }}/{{ teacher.lastname }}_fiche_service.xlsx')" class="btn btn-primary">Voir la fiche</a>
+                <!--<a href="#" onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline }}/{{ teacher.lastname }}_fiche_service.xlsx')" class="btn btn-primary">Voir la fiche</a>-->
+                <a href="#" onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')" class="btn btn-primary">Voir la fiche</a>
             </div>
         </div>
     </div>

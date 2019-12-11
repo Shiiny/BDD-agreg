@@ -2,13 +2,11 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\BddSearch;
 use App\Entity\Teacher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Doctrine\ORM\Query;
-use phpDocumentor\Reflection\Types\Mixed_;
 
 /**
  * @method Teacher|null find($id, $lockMode = null, $lockVersion = null)
@@ -37,34 +35,17 @@ class TeacherRepository extends ServiceEntityRepository
         ;
     }
 
-    /*
-    public function findOneBySomeField($value): ?Teacher
+    public function findSearch(SearchData $search)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('t', 'c', 'd')
+            ->leftJoin('t.cours', 'c')
+            ->join('t.discipline', 'd')
+            ->andWhere('t.id = :id')
+            ->setParameter('id', $search->teacher->getId())
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-    */
 
-    /**
-     * @param BddSearch $search
-     */
-    public function findByParam(BddSearch $search)
-    {
-        $sql = 't.firstname LIKE :search 
-                OR t.lastname LIKE :search';
-
-        $query = $this->createQueryBuilder('t');
-
-        if ($search->getTeacher()) {
-                $query = $query->where($sql)
-                    ->setParameter('search', '%' .$search->getTeacher(). '%');
-        }
-
-
-        return $query->getQuery()->getSingleResult();
-    }
 }

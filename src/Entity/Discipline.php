@@ -38,6 +38,11 @@ class Discipline
      */
     private $code;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $categorie;
+
     public function __construct()
     {
         $this->teachers = new ArrayCollection();
@@ -139,5 +144,17 @@ class Discipline
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }
