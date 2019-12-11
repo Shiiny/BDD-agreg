@@ -135,4 +135,9 @@ class Discipline
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
