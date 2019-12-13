@@ -21,25 +21,42 @@ class CoursRepository extends ServiceEntityRepository
         parent::__construct($registry, Cours::class);
     }
 
-    public function findByTeacher(Teacher $teacher)
+    public function findSearch(SearchData $search): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere(':teacher MEMBER OF c.teachers')
-            ->setParameter('teacher', $teacher->getId())
+        return $this->findAllExist()
+            ->andWhere('c.title LIKE :search')
+            ->setParameter('search', '%' .$search->cours. '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findAllNoTeacher($param)
+    {
+        return $this->findAllExist()
+            ->where('t.id IS NULL')
+            ->orderBy('c.title', $param)
             ->getQuery()
             ->getResult()
             ;
     }
 
-    public function findSearch(SearchData $search): array
+    public function findAllByOrder($param)
     {
-        return $this->createQueryBuilder('c')
-            ->select('c', 't', 'd')
-            ->leftJoin('c.teachers', 't')
-            ->leftJoin('c.discipline', 'd')
-            ->andWhere('c.title LIKE :search')
-            ->setParameter('search', '%' .$search->cours. '%')
+        return $this->findAllExist()
+            ->orderBy('c.title', $param)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+            ;
+    }
+
+    private function findAllExist()
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c', 't', 'd', 'f')
+            ->leftJoin('c.teachers', 't')
+            ->leftJoin('c.formations', 'f')
+            ->leftJoin('c.discipline', 'd')
+            ;
+        return $query;
     }
 }

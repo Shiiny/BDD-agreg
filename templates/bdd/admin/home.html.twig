@@ -28,7 +28,7 @@
                         <tbody>
                         {% for teacher in teachers %}
                             <tr>
-                                <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
+                                <td>{{ teacher.name }}</td>
                                 <td>
 
                                 </td>
@@ -43,15 +43,4 @@
         
     </div>
 
-{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css">
-{% endblock %}
-
-{% block javascripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
-    <script>
-        $('select').select2();
-    </script>
 {% endblock %}

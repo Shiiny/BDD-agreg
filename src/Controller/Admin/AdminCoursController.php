@@ -23,7 +23,7 @@ class AdminCoursController extends AbstractController
     public function index(CoursRepository $coursRepository): Response
     {
         return $this->render('bdd/admin/cours/index.html.twig', [
-            'cours' => $coursRepository->findAll(),
+            'cours' => $coursRepository->findAllByOrder('ASC'),
         ]);
     }
 

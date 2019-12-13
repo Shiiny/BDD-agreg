@@ -34,6 +34,12 @@ header img {
     width: 217px;
 }
 
+a.list-item-link {
+    color: #b58e53 !important;
+}
+.badge {
+    font-weight: 400;
+}
 .card-head {
     display: flex;
     flex-direction: column;
@@ -87,9 +93,13 @@ header img {
     background-color: #BFAE94;
 }
 
-
 .card-head ul {
     list-style: none;
     text-align: center;
     font-weight: 300;
+}
+
+a.list-item-link:hover {
+    padding-left: 10px;
+    text-decoration: none;
 }

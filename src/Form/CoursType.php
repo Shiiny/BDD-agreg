@@ -22,16 +22,17 @@ class CoursType extends AbstractType
             ->add('formations', EntityType::class, [
                 'class' => Formation::class,
                 'choice_label' => 'code',
-                'multiple' => true
+                'multiple' => true,
             ])
             ->add('teachers', EntityType::class, [
                 'class' => Teacher::class,
-                'choice_label' => 'lastname',
-                'multiple' => true
+                'choice_label' => 'name',
+                'multiple' => true,
             ])
             ->add('discipline', EntityType::class, [
                 'class' => Discipline::class,
-                'choice_label' => 'title'])
+                'choice_label' => 'title',
+            ])
         ;
     }
 
