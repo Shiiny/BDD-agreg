@@ -18,6 +18,7 @@
                     <td>
                     {% for teacher in cours.teachers %}
                         <div>
+                            <!--<a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>-->
                             <a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
                         </div>
                     {% endfor %}

@@ -19,6 +19,7 @@
                         {% for teacher in cours.teachers %}
                             <tr>
                                 <td>
+                                    <!--<a href="#" class="list-item-link" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>-->
                                     <a class="list-item-link" href="#" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
                                 </td>
                                 <td>{{ cours.hours }}</td>
