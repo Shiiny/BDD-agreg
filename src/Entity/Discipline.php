@@ -24,11 +24,6 @@ class Discipline
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Teacher", mappedBy="discipline")
-     */
-    private $teachers;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Cours", mappedBy="discipline")
      */
     private $cours;
@@ -43,10 +38,16 @@ class Discipline
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Teacher", mappedBy="discipline")
+     */
+    private $teachers;
+
+
     public function __construct()
     {
-        $this->teachers = new ArrayCollection();
         $this->cours = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
     }
 
 
@@ -63,37 +64,6 @@ class Discipline
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Teacher[]
-     */
-    public function getTeachers(): Collection
-    {
-        return $this->teachers;
-    }
-
-    public function addTeacher(Teacher $teacher): self
-    {
-        if (!$this->teachers->contains($teacher)) {
-            $this->teachers[] = $teacher;
-            $teacher->setDiscipline($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTeacher(Teacher $teacher): self
-    {
-        if ($this->teachers->contains($teacher)) {
-            $this->teachers->removeElement($teacher);
-            // set the owning side to null (unless already changed)
-            if ($teacher->getDiscipline() === $this) {
-                $teacher->setDiscipline(null);
-            }
-        }
 
         return $this;
     }
@@ -154,6 +124,37 @@ class Discipline
     public function setCategorie(string $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getTeachers(): Collection
+    {
+        return $this->teachers;
+    }
+
+    public function addTeacher(Teacher $teacher): self
+    {
+        if (!$this->teachers->contains($teacher)) {
+            $this->teachers[] = $teacher;
+            $teacher->setDiscipline($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Teacher $teacher): self
+    {
+        if ($this->teachers->contains($teacher)) {
+            $this->teachers->removeElement($teacher);
+            // set the owning side to null (unless already changed)
+            if ($teacher->getDiscipline() === $this) {
+                $teacher->setDiscipline(null);
+            }
+        }
 
         return $this;
     }

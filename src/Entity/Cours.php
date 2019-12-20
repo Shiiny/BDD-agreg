@@ -48,10 +48,16 @@ class Cours
      */
     private $hours;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Concours", inversedBy="cours")
+     */
+    private $concours;
+
     public function __construct()
     {
         $this->formations = new ArrayCollection();
         $this->teachers = new ArrayCollection();
+        $this->concours = new ArrayCollection();
     }
 
 
@@ -158,6 +164,32 @@ class Cours
     public function setHours(?int $hours): self
     {
         $this->hours = $hours;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Concours[]
+     */
+    public function getConcours(): Collection
+    {
+        return $this->concours;
+    }
+
+    public function addConcour(Concours $concour): self
+    {
+        if (!$this->concours->contains($concour)) {
+            $this->concours[] = $concour;
+        }
+
+        return $this;
+    }
+
+    public function removeConcour(Concours $concour): self
+    {
+        if ($this->concours->contains($concour)) {
+            $this->concours->removeElement($concour);
+        }
 
         return $this;
     }

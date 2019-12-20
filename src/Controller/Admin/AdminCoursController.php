@@ -24,6 +24,7 @@ class AdminCoursController extends AbstractController
     {
         return $this->render('bdd/admin/cours/index.html.twig', [
             'cours' => $coursRepository->findAllByOrder('ASC'),
+            'current_menu' => 'cours',
         ]);
     }
 

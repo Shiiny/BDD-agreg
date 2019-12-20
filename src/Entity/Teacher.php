@@ -55,21 +55,27 @@ class Teacher
      */
     private $id_moodle;
 
-   /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="teachers")
-     */
-    private $discipline;
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Cours", mappedBy="teachers")
      */
     private $cours;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Concours", inversedBy="teachers")
+     */
+    private $concours;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="teachers")
+     */
+    private $discipline;
 
 
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->cours = new ArrayCollection();
+        $this->concours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,22 +158,6 @@ class Teacher
     /**
      * @return Collection|Cours[]
      */
-
-    public function getDiscipline(): ?Discipline
-    {
-        return $this->discipline;
-    }
-
-    public function setDiscipline(?Discipline $discipline): self
-    {
-        $this->discipline = $discipline;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Cours[]
-     */
     public function getCours(): Collection
     {
         return $this->cours;
@@ -218,4 +208,41 @@ class Teacher
         return $this->getLastname();
     }
 
+    /**
+     * @return Collection|Concours[]
+     */
+    public function getConcours(): Collection
+    {
+        return $this->concours;
+    }
+
+    public function addConcour(Concours $concour): self
+    {
+        if (!$this->concours->contains($concour)) {
+            $this->concours[] = $concour;
+        }
+
+        return $this;
+    }
+
+    public function removeConcour(Concours $concour): self
+    {
+        if ($this->concours->contains($concour)) {
+            $this->concours->removeElement($concour);
+        }
+
+        return $this;
+    }
+
+    public function getDiscipline(): ?Discipline
+    {
+        return $this->discipline;
+    }
+
+    public function setDiscipline(?Discipline $discipline): self
+    {
+        $this->discipline = $discipline;
+
+        return $this;
+    }
 }

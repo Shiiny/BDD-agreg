@@ -27,6 +27,7 @@ class AdminTeacherController extends AbstractController
     {
         return $this->render('bdd/admin/teacher/index.html.twig', [
             'teachers' => $teacherRepository->findAll(),
+            'current_menu' => 'teacher'
         ]);
     }
 

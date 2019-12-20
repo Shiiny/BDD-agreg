@@ -24,6 +24,7 @@ class AdminDisciplineController extends AbstractController
     {
         return $this->render('bdd/admin/discipline/index.html.twig', [
             'disciplines' => $disciplineRepository->findAll(),
+            'current_menu' => 'discipline'
         ]);
     }
 

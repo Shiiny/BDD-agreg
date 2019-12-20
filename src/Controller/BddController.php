@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Data\SearchData;
-use App\Entity\Cours;
-use App\Entity\Formation;
-use App\Entity\Teacher;
 use App\Form\SearchCoursForm;
 use App\Form\SearchTeacherForm;
 use App\Form\SearchFormationForm;
+use App\Repository\ConcoursRepository;
 use App\Repository\CoursRepository;
 use App\Repository\FormationRepository;
 use App\Repository\TeacherRepository;
@@ -20,24 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class BddController extends AbstractController
 {
 
+
     /**
      * @var TeacherRepository
      */
-    private $teacherRepository;
+    private $tr;
     /**
-     * @var FormationRepository
+     * @var ConcoursRepository
      */
-    private $formationRepository;
+    private $ccr;
     /**
      * @var CoursRepository
      */
-    private $coursRepository;
+    private $cr;
 
-    public function __construct(TeacherRepository $teacherRepository, FormationRepository $formationRepository, CoursRepository $coursRepository)
+    public function __construct(TeacherRepository $tr, ConcoursRepository $ccr, CoursRepository $cr)
     {
-        $this->teacherRepository = $teacherRepository;
-        $this->formationRepository = $formationRepository;
-        $this->coursRepository = $coursRepository;
+        $this->tr = $tr;
+        $this->ccr = $ccr;
+        $this->cr = $cr;
     }
 
 
@@ -52,44 +51,45 @@ class BddController extends AbstractController
 
         $formTeacher = $this->createForm(SearchTeacherForm::class, $data);
         $formCours = $this->createForm(SearchCoursForm::class, $data);
-        $formFormation = $this->createForm(SearchFormationForm::class, $data);
+        $formConcours = $this->createForm(SearchFormationForm::class, $data);
 
 
         $formTeacher->handleRequest($request);
         $formCours->handleRequest($request);
-        $formFormation->handleRequest($request);
+        $formConcours->handleRequest($request);
 
 
         if ($formTeacher->isSubmitted()) {
-            $teacher = $this->teacherRepository->findSearch($data);
+            $teacher = $this->tr->findSearch($data);
+
+            //dd($teacher);
 
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),
                 'formCours' => $formCours->createView(),
-                'formFormation' => $formFormation->createView(),
+                'formFormation' => $formConcours->createView(),
                 'teacher' => $teacher,
             ]);
         }
 
-        if ($formFormation->isSubmitted()) {
-            $formation = $this->formationRepository->findSearch($data);
+        if ($formConcours->isSubmitted()) {
+            $formation = $this->ccr->findSearch($data);
 
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),
                 'formCours' => $formCours->createView(),
-                'formFormation' => $formFormation->createView(),
+                'formFormation' => $formConcours->createView(),
                 'formation' => $formation,
             ]);
         }
 
         if ($formCours->isSubmitted()) {
-            $courses = $this->coursRepository->findSearch($data);
-            dump($courses);
+            $courses = $this->cr->findSearch($data);
 
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),
                 'formCours' => $formCours->createView(),
-                'formFormation' => $formFormation->createView(),
+                'formFormation' => $formConcours->createView(),
                 'courses' => $courses,
                 'data' => $data->cours
             ]);
@@ -98,7 +98,7 @@ class BddController extends AbstractController
         return $this->render('bdd/index.html.twig', [
             'formTeacher' => $formTeacher->createView(),
             'formCours' => $formCours->createView(),
-            'formFormation' => $formFormation->createView()
+            'formFormation' => $formConcours->createView()
         ]);
     }
 }

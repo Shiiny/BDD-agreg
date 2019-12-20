@@ -52,10 +52,9 @@ class CoursRepository extends ServiceEntityRepository
     private function findAllExist()
     {
         $query = $this->createQueryBuilder('c')
-            ->select('c', 't', 'd', 'f')
+            ->select('c', 't', 'cc')
             ->leftJoin('c.teachers', 't')
-            ->leftJoin('c.formations', 'f')
-            ->leftJoin('c.discipline', 'd')
+            ->leftJoin('c.concours', 'cc')
             ;
         return $query;
     }

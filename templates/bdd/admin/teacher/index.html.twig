@@ -1,39 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'bdd/admin/home.html.twig' %}
 
 {% block title 'Admin' %}
 
-{% block body %}
-    <div class="container mt-4">
-        {% for label, messages in app.flashes() %}
-            {% for message in messages %}
-                <div id="flash" class="alert alert-{{ label }}" role="alert">
-                    <p class="message">Message flash : {{ message }}</p>
-                </div>
-            {% endfor %}
-        {% endfor %}
+{% block content %}
         <div class="card">
             <div class="card-body">
                 <h1>Gérer les enseignants</h1>
                 <div class="text-right mb-3">
-                    <a href="{{ path('admin.teacher.new') }}" class="btn btn-secondary">Ajouter</a>
+                    <a href="{{ path('admin.teacher.new') }}" class="btn btn-dark">Ajouter</a>
                 </div>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>Nom</th>
-                        <th>Action</th>
+                        <th>Discipline</th>
+                        <th style="width: 5%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for teacher in teachers %}
                         <tr>
-                            <td>{{ teacher.lastname }} {{ teacher.firstname }}</td>
                             <td>
-                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="btn btn-primary">Editer</a>
+                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="list-item-link">{{ teacher.name }}</a>
+                            </td>
+                            <td>
+                                {% if teacher.discipline.id is defined %}
+                                    <a href="{{ path('admin.discipline.edit', {id:teacher.discipline.id}) }}" class="list-item-link">{{ teacher.discipline.categorie }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
                                 <form method="post" action="{{ path('admin.teacher.delete', {id: teacher.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ teacher.id) }}">
-                                    <button class="btn btn-danger">Supprimer</button>
+                                    <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -42,8 +41,5 @@
                 </table>
             </div>
         </div>
-
-        
-    </div>
 
 {% endblock %}

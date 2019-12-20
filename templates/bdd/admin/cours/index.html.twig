@@ -1,19 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'bdd/admin/home.html.twig' %}
 
 {% block title 'Admin' %}
 
-{% block body %}
-    <div class="container mt-4">
-        {% for label, messages in app.flashes() %}
-            {% for message in messages %}
-                <div id="flash" class="alert alert-{{ label }}" role="alert">
-                    <p class="message">Message flash : {{ message }}</p>
-                </div>
-            {% endfor %}
-        {% endfor %}
+{% block content %}
         <div class="card">
             <div class="card-body">
-                <h1>Gérer les cours</h1>
+                <h2>Gérer les cours</h2>
                 <div class="text-right mb-3">
                     <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
                 </div>
@@ -44,8 +36,4 @@
                 </table>
             </div>
         </div>
-
-        
-    </div>
-
 {% endblock %}

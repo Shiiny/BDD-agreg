@@ -1,18 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'bdd/admin/home.html.twig' %}
 
 {% block title 'Admin' %}
 
 {% block body %}
     <div class="container">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Ajouter un enseignant</h2>
-                    {{ include ('bdd/components/_form_admin_teacher.html.twig') }}
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <h2>Ajouter un enseignant</h2>
+                {{ include ('bdd/components/_form_admin_teacher.html.twig') }}
             </div>
         </div>
-
     </div>
 
 {% endblock %}

@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Data\SearchData;
-use App\Entity\Formation;
+use App\Entity\Concours;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,9 +16,9 @@ class SearchFormationForm extends AbstractType
         $builder
             ->add('formation', EntityType::class, [
                 'placeholder' => 'Selectionnez une formation',
-                'class' => Formation::class,
-                'choice_label' => 'code',
-                'choice_value' => 'code',
+                'class' => Concours::class,
+                'choice_label' => 'code_cohorte',
+                'choice_value' => 'code_cohorte',
             ])
         ;
     }

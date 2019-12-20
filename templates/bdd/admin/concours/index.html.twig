@@ -5,9 +5,9 @@
 {% block content %}
         <div class="card">
             <div class="card-body">
-                <h1>Gérer les disciplines</h1>
+                <h2>Gérer les concours</h2>
                 <div class="text-right mb-3">
-                    <a href="{{ path('admin.discipline.new') }}" class="btn btn-secondary">Ajouter</a>
+                    <a href="{{ path('admin.concours.new') }}" class="btn btn-secondary">Ajouter</a>
                 </div>
                 <table class="table table-striped">
                     <thead>
@@ -18,15 +18,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for discipline in disciplines %}
+                    {% for c in concours %}
                         <tr>
-                            <td>{{ discipline.title }}</td>
+                            <td><a href="{{ path('admin.concours.edit', {id:c.id}) }}" class="list-item-link">{{ c.title }}</a></td>
                             <td></td>
                             <td>
-                                <a href="{{ path('admin.discipline.edit', {id:discipline.id}) }}" class="btn btn-primary">Editer</a>
-                                <form method="post" action="{{ path('admin.discipline.delete', {id: discipline.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+                                <form method="post" action="{{ path('admin.concours.delete', {id: c.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ discipline.id) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
                                     <button class="btn btn-danger">Supprimer</button>
                                 </form>
                             </td>

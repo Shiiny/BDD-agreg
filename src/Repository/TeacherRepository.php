@@ -38,11 +38,13 @@ class TeacherRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search)
     {
         return $this->createQueryBuilder('t')
-            ->select('t', 'c', 'd')
+            ->select('t', 'c', 'd', 'cc')
             ->leftJoin('t.cours', 'c')
-            ->join('t.discipline', 'd')
+            ->innerJoin('c.concours', 'cc')
+            ->leftJoin('t.discipline', 'd')
             ->andWhere('t.id = :id')
             ->setParameter('id', $search->teacher->getId())
+            ->andWhere('c.id IN cc.id')
             ->getQuery()
             ->getOneOrNullResult()
             ;

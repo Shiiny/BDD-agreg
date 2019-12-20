@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-8">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col-lg-4">
+            {{ form_row(form.code_cohorte) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_row(form.type) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.code_t) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_row(form.public) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.code_p) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form_row(form.material) }}
+        </div>
+        <div class="col-lg-6">
+            {{ form_row(form.code_m) }}
+        </div>
+    </div>
+<div class="row">
+    <div class="col-lg-6">
+        {{ form_row(form.categorie) }}
+    </div>
+    <div class="col-lg-6">
+        {{ form_row(form.code_c) }}
+    </div>
+</div>
+    <button class="btn btn-dark">{{ button|default('Ajouter') }}</button>
+{{ form_rest(form) }}
+{{ form_end(form) }}

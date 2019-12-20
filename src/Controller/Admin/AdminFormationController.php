@@ -24,6 +24,7 @@ class AdminFormationController extends AbstractController
     {
         return $this->render('bdd/admin/formation/index.html.twig', [
             'formations' => $formationRepository->findAll(),
+            'current_menu' => 'formation'
         ]);
     }
 

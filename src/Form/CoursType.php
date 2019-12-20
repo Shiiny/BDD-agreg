@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Concours;
 use App\Entity\Cours;
 use App\Entity\Discipline;
-use App\Entity\Formation;
 use App\Entity\Teacher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,9 +19,9 @@ class CoursType extends AbstractType
             ->add('title')
             ->add('id_moodle')
             ->add('hours')
-            ->add('formations', EntityType::class, [
-                'class' => Formation::class,
-                'choice_label' => 'code',
+            ->add('concours', EntityType::class, [
+                'class' => Concours::class,
+                'choice_label' => 'code_cohorte',
                 'multiple' => true,
             ])
             ->add('teachers', EntityType::class, [

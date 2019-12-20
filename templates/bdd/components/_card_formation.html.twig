@@ -11,12 +11,12 @@
                 </tr>
             </thead>
             <tbody>
-            {% for cours in formation.courses %}
+            {% for c in formation.cours %}
                 <tr>
-                    <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ cours.idmoodle }}">{{ cours.title }}</a></td>
-                    <td>{{ cours.hours }}</td>
+                    <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ c.idmoodle }}">{{ c.title }}</a></td>
+                    <td>{{ c.hours }}</td>
                     <td>
-                    {% for teacher in cours.teachers %}
+                    {% for teacher in c.teachers %}
                         <div>
                             <!--<a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>-->
                             <a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
