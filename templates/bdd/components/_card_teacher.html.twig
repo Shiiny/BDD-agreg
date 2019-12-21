@@ -1,5 +1,4 @@
 {% if teacher is defined %}
-    {{ dump(teacher) }}
     <div class="card">
         <div class="card-head">
             <div class="card-head-user"><i class="fas fa-user"></i></div>
@@ -16,25 +15,34 @@
         </div>
         <div class="card-body">
             <table class="table table-striped">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>Cours</th>
-                        <th style="width: 10%">Heures</th>
+                        <th>Concours</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for c in teacher.cours %}
-
                     <tr>
-                        <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ c.idmoodle }}">{{ c.title }}</a></td>
-                        <td>{{ c.hours }}</td>
+                        <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ c.idmoodle }}" target="_blank">{{ c.title }}</a></td>
+                        {% set codes = [] %}
+                        {% for cc in c.concours %}
+                            {% if cc.codeT not in codes %}
+                                {% set codes = codes|merge([cc.codeT]) %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if loop.index0 is divisible by (2) %}
+                            <td>{{ codes|join(', ') }}</td>
+                        {% else %}
+                            <td>{{ codes[0] }}</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
             <div class="d-flex justify-content-center">
-                <!--<a href="#" {% if teacher.discipline is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %} class="btn btn-outline-dark">Voir la fiche</a>-->
-                <a href="#" {% if teacher.discipline is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %} class="btn btn-outline-dark">Voir la fiche</a>
+                <a href="#" {% if teacher.discipline is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %} class="btn btn-outline-dark">Voir la fiche</a>
+                <a style="display:none" href="#" {% if teacher.discipline is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %} class="btn btn-outline-dark">Voir la fiche</a>
             </div>
         </div>
     </div>

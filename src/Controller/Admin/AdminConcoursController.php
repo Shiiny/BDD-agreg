@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Data\SearchData;
 use App\Entity\Concours;
 use App\Form\ConcoursType;
 use App\Repository\ConcoursRepository;
@@ -17,13 +18,17 @@ class AdminConcoursController extends AbstractController
 {
     /**
      * @Route("/", name="admin.concours.index")
-     * @param ConcoursRepository $concoursRepository
+     * @param ConcoursRepository $ccr
+     * @param Request $request
      * @return Response
      */
-    public function index(ConcoursRepository $concoursRepository): Response
+    public function index(ConcoursRepository $ccr, Request $request): Response
     {
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+
         return $this->render('bdd/admin/concours/index.html.twig', [
-            'concours' => $concoursRepository->findAll(),
+            'concours' => $ccr->findAllConcours($data),
             'current_menu' => 'concours'
         ]);
     }

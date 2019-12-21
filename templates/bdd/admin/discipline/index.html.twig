@@ -12,22 +12,21 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Enseignant</th>
+                        <th>Titre</th>
+                        <th>Categorie</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for discipline in disciplines %}
                         <tr>
-                            <td>{{ discipline.title }}</td>
-                            <td></td>
+                            <td><a href="{{ path('admin.discipline.edit', {id:discipline.id}) }}" class="list-item-link">{{ discipline.title }}</a></td>
+                            <td>{{ discipline.categorie }}</td>
                             <td>
-                                <a href="{{ path('admin.discipline.edit', {id:discipline.id}) }}" class="btn btn-primary">Editer</a>
                                 <form method="post" action="{{ path('admin.discipline.delete', {id: discipline.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ discipline.id) }}">
-                                    <button class="btn btn-danger">Supprimer</button>
+                                    <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>

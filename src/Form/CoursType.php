@@ -18,7 +18,6 @@ class CoursType extends AbstractType
         $builder
             ->add('title')
             ->add('id_moodle')
-            ->add('hours')
             ->add('concours', EntityType::class, [
                 'class' => Concours::class,
                 'choice_label' => 'code_cohorte',

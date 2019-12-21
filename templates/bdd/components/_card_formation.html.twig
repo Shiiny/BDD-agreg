@@ -1,26 +1,22 @@
 {% if formation is defined %}
 <div class="card">
     <div class="card-body">
-        <h1>{{ formation.title }}</h1>
+        <h2 class="mb-4">{{ formation.title }}</h2>
         <table class="table table-striped">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th>Cours</th>
-                    <th>Heures</th>
-                    <th style="width: 18%">Enseignant</th>
+                    <th>Enseignant</th>
                 </tr>
             </thead>
             <tbody>
             {% for c in formation.cours %}
                 <tr>
-                    <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ c.idmoodle }}">{{ c.title }}</a></td>
-                    <td>{{ c.hours }}</td>
+                    <td><a class="list-item-link" href="https://moodlecollegesevigne.fr/course/view.php?id={{ c.idmoodle }}" target="_blank">{{ c.title }}</a></td>
                     <td>
                     {% for teacher in c.teachers %}
-                        <div>
-                            <!--<a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>-->
-                            <a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
-                        </div>
+                            <a href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|//NAS-AGREG/commun/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
+                            <a style="display:none" href="#" class="badge badge-dark" {% if teacher.discipline.categorie is defined %}onclick="window.open('ms-excel:ofe|u|C:/Users/ourya/Desktop/Lab/Enseignants_Services/Services_{{ teacher.discipline.categorie }}/{{ teacher.nameFormated }}_fiche_service.xlsx')"{% endif %}>{{ teacher.name }}</a>
                     {% endfor %}
                     </td>
                 </tr>

@@ -22,6 +22,11 @@ body {
     background: #DEDEDE;
 }
 
+.card-body .table td, .card-body .table th {
+    padding: .40rem;
+    vertical-align: middle;
+}
+
 header {
     background: #FFF;
     height: 100px;
@@ -34,9 +39,16 @@ header img {
     width: 217px;
 }
 
-a.list-item-link {
+a.list-item-link, a.list-item-link-view {
+    display: block;
     color: #b58e53 !important;
 }
+
+a.list-item-link-view {
+    text-align: right;
+    padding: 0 10px;
+}
+
 .badge {
     font-weight: 400;
 }
@@ -100,6 +112,20 @@ a.list-item-link {
 }
 
 a.list-item-link:hover {
-    padding-left: 10px;
+    margin: 0 -10px 0 10px;
     text-decoration: none;
+}
+
+a.list-item-link-view:hover {
+    color: #7e5a3f !important;
+    text-decoration: none;
+}
+
+a.sort-item-link {
+    color: #28586f !important;
+}
+
+.badge-cs {
+    background-color: #28586f;
+    color: #f8f9fa;
 }

@@ -2,11 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Teacher;
-use App\Form\TeacherType;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,13 +15,13 @@ class AdminController extends AbstractController
 
     /**
      * @Route("/", name="admin.index")
-     * @param TeacherRepository $teacherRepository
+     * @param TeacherRepository $tr
      * @return Response
      */
-    public function index(TeacherRepository $teacherRepository): Response
+    public function index(TeacherRepository $tr): Response
     {
         return $this->render('bdd/admin/home.html.twig', [
-            'teachers' => $teacherRepository->findByLimite(10)
+            'teachers' => $tr->findByLimite(10)
         ]);
     }
 

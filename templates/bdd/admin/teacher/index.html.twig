@@ -12,8 +12,8 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Discipline</th>
+                        <th>{{knp_pagination_sortable(teachers, 'Nom', 't.lastname')}}</th>
+                        <th>{{knp_pagination_sortable(teachers, 'Discipline', 'd.categorie')}}</th>
                         <th style="width: 5%">Action</th>
                     </tr>
                     </thead>
@@ -21,11 +21,11 @@
                     {% for teacher in teachers %}
                         <tr>
                             <td>
-                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="list-item-link">{{ teacher.name }}</a>
+                                <a href="{{ path('admin.teacher.edit', {id:teacher.id}) }}" class="list-item-link">{{ teacher.name }} <small><i class="fas fa-pen"></i></small></a>
                             </td>
                             <td>
                                 {% if teacher.discipline.id is defined %}
-                                    <a href="{{ path('admin.discipline.edit', {id:teacher.discipline.id}) }}" class="list-item-link">{{ teacher.discipline.categorie }}</a>
+                                    <a href="{{ path('admin.discipline.edit', {id:teacher.discipline.id}) }}" class="list-item-link">{{ teacher.discipline.categorie }} <small><i class="fas fa-pen"></i></small></a>
                                 {% endif %}
                             </td>
                             <td>
@@ -39,6 +39,9 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <div>
+                    {{ knp_pagination_render(teachers) }}
+                </div>
             </div>
         </div>
 

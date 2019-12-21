@@ -7,6 +7,8 @@ use App\Entity\Cours;
 use App\Entity\Teacher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Cours|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,9 +18,15 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class CoursRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Cours::class);
+        $this->paginator = $paginator;
     }
 
     public function findSearch(SearchData $search): array
@@ -40,22 +48,29 @@ class CoursRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findAllByOrder($param)
+    /**
+     * @param SearchData $search
+     * @return PaginationInterface
+     */
+    public function findAllCourses(SearchData $search): PaginationInterface
     {
-        return $this->findAllExist()
-            ->orderBy('c.title', $param)
-            ->getQuery()
-            ->getResult()
-            ;
+        $query = $this->findAllExist()
+            ->getQuery();
+
+        return $this->paginator->paginate(
+          $query,
+          $search->page,
+          15
+        );
     }
 
     private function findAllExist()
     {
-        $query = $this->createQueryBuilder('c')
-            ->select('c', 't', 'cc')
+        return $this->createQueryBuilder('c')
+            ->select('c', 't', 'd', 'cc')
             ->leftJoin('c.teachers', 't')
             ->leftJoin('c.concours', 'cc')
+            ->join('c.discipline', 'd')
             ;
-        return $query;
     }
 }

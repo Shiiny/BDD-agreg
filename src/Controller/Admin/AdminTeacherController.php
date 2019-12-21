@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 
+use App\Data\SearchData;
 use App\Entity\Teacher;
 use App\Form\TeacherType;
 use App\Repository\TeacherRepository;
@@ -20,13 +21,17 @@ class AdminTeacherController extends AbstractController
 {
     /**
      * @Route("/", name="admin.teacher.index")
-     * @param TeacherRepository $teacherRepository
+     * @param TeacherRepository $tr
+     * @param Request $request
      * @return Response
      */
-    public function index(TeacherRepository $teacherRepository):Response
+    public function index(TeacherRepository $tr, Request $request):Response
     {
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+
         return $this->render('bdd/admin/teacher/index.html.twig', [
-            'teachers' => $teacherRepository->findAll(),
+            'teachers' => $tr->findAllTeacher($data),
             'current_menu' => 'teacher'
         ]);
     }

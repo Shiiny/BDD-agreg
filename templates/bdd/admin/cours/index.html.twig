@@ -3,37 +3,58 @@
 {% block title 'Admin' %}
 
 {% block content %}
-        <div class="card">
-            <div class="card-body">
-                <h2>Gérer les cours</h2>
-                <div class="text-right mb-3">
-                    <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
-                </div>
-                <table class="table table-striped">
-                    <thead>
+    <div class="card">
+        <div class="card-body">
+            <h2>Gérer les cours</h2>
+            <div class="text-right mb-3">
+                <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>{{knp_pagination_sortable(cours, 'Cours', 'c.title')}}</th>
+                    <th>{{knp_pagination_sortable(cours, 'Catégories', 'd.title')}}</th>
+                    <th>Concours</th>
+                    <th>Enseignants</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for c in cours %}
                     <tr>
-                        <th>Nom</th>
-                        <th>Enseignant</th>
-                        <th>Action</th>
+                        <td><a href="{{ path('admin.cours.edit', {id:c.id}) }}" class="list-item-link">{{ c.title }} <small><i class="fas fa-pen"></i></small></a></td>
+                        <td>{{ c.discipline }}</td>
+                        {% set codes = [] %}
+                        {% for cc in c.concours %}
+                            {% if cc.type not in codes %}
+                                {% set codes = codes|merge([cc.type]) %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if loop.index0 is divisible by (2) %}
+                            <td><small>{{ codes|join(', ') }}</small></td>
+                        {% else %}
+                            <td><small>{{ codes[0] }}</small></td>
+                        {% endif %}
+                        <td>
+                            {% for t in c.teachers %}
+                                <a href="{{ path('admin.teacher.edit', {id:t.id}) }}"><span class="badge badge-pill badge-dark">{{ t.name }} <small><i class="fas fa-pen"></i></small></span></a>
+                            {% endfor %}
+                        </td>
+                        <td>
+
+                            <form method="post" action="{{ path('admin.cours.delete', {id: c.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
+                                <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for cour in cours %}
-                        <tr>
-                            <td>{{ cour.title }}</td>
-                            <td></td>
-                            <td>
-                                <a href="{{ path('admin.cours.edit', {id:cour.id}) }}" class="btn btn-primary">Editer</a>
-                                <form method="post" action="{{ path('admin.cours.delete', {id: cour.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cour.id) }}">
-                                    <button class="btn btn-danger">Supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                {{ knp_pagination_render(cours) }}
             </div>
         </div>
+    </div>
 {% endblock %}

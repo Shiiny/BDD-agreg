@@ -3,10 +3,11 @@
 namespace App\Repository;
 
 use App\Data\SearchData;
-use App\Entity\BddSearch;
 use App\Entity\Teacher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Teacher|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,19 +17,24 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class TeacherRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Teacher::class);
+        $this->paginator = $paginator;
     }
 
-    /**
-    * @return Teacher[] Returns an array of Teacher objects
-    */
 
     public function findByLimite($value)
     {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.created_at', 'ASC')
+            ->select('t', 'd')
+            ->leftJoin('t.discipline', 'd')
+            ->orderBy('t.created_at', 'DESC')
             ->setMaxResults($value)
             ->getQuery()
             ->getResult()
@@ -40,14 +46,32 @@ class TeacherRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->select('t', 'c', 'd', 'cc')
             ->leftJoin('t.cours', 'c')
-            ->innerJoin('c.concours', 'cc')
+            ->leftJoin('c.concours', 'cc')
             ->leftJoin('t.discipline', 'd')
             ->andWhere('t.id = :id')
             ->setParameter('id', $search->teacher->getId())
-            ->andWhere('c.id IN cc.id')
             ->getQuery()
             ->getOneOrNullResult()
             ;
     }
 
+    /**
+     * @param SearchData $search
+     * @return PaginationInterface
+     */
+    public function findAllTeacher(SearchData $search): PaginationInterface
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t', 'c', 'd', 'cc')
+            ->leftJoin('t.cours', 'c')
+            ->leftJoin('c.concours', 'cc')
+            ->leftJoin('t.discipline', 'd')
+            ->getQuery();
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            15
+        );
+    }
 }

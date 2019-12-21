@@ -12,27 +12,34 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Nom</th>
-                        <th>Enseignant</th>
+                        <th>{{knp_pagination_sortable(concours, 'Formation', 'f.title')}}</th>
+                        <th>Cohorte_moodle</th>
+                        <th>{{knp_pagination_sortable(concours, 'Concours', 'f.type')}}</th>
+                        <th>{{knp_pagination_sortable(concours, 'Public', 'f.public')}}</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for c in concours %}
+                    {% for cc in concours %}
                         <tr>
-                            <td><a href="{{ path('admin.concours.edit', {id:c.id}) }}" class="list-item-link">{{ c.title }}</a></td>
-                            <td></td>
+                            <td><a href="{{ path('admin.concours.edit', {id:cc.id}) }}" class="list-item-link">{{ cc.title }}</a></td>
+                            <td><span class="badge badge-cs">{{ cc.codeCohorte }}</span></td>
+                            <td>{{ cc.type }}</td>
+                            <td>{{ cc.public }}</td>
                             <td>
-                                <form method="post" action="{{ path('admin.concours.delete', {id: c.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+                                <form method="post" action="{{ path('admin.concours.delete', {id: cc.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ c.id) }}">
-                                    <button class="btn btn-danger">Supprimer</button>
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cc.id) }}">
+                                    <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
+                <div>
+                    {{ knp_pagination_render(concours) }}
+                </div>
             </div>
         </div>
 {% endblock %}

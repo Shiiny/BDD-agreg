@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Data\SearchData;
 use App\Entity\Cours;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
@@ -17,13 +18,17 @@ class AdminCoursController extends AbstractController
 {
     /**
      * @Route("/", name="admin.cours.index")
-     * @param CoursRepository $coursRepository
+     * @param CoursRepository $cr
+     * @param Request $request
      * @return Response
      */
-    public function index(CoursRepository $coursRepository): Response
+    public function index(CoursRepository $cr, Request $request): Response
     {
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+
         return $this->render('bdd/admin/cours/index.html.twig', [
-            'cours' => $coursRepository->findAllByOrder('ASC'),
+            'cours' => $cr->findAllCourses($data),
             'current_menu' => 'cours',
         ]);
     }

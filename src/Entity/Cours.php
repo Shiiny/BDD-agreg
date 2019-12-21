@@ -29,11 +29,6 @@ class Cours
     private $id_moodle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="Courses")
-     */
-    private $formations;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Teacher", inversedBy="cours")
      */
     private $teachers;
@@ -42,11 +37,6 @@ class Cours
      * @ORM\ManyToOne(targetEntity="App\Entity\Discipline", inversedBy="cours")
      */
     private $discipline;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $hours;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Concours", inversedBy="cours")
@@ -91,34 +81,6 @@ class Cours
     }
 
     /**
-     * @return Collection|Formation[]
-     */
-    public function getFormations(): Collection
-    {
-        return $this->formations;
-    }
-
-    public function addFormation(Formation $formation): self
-    {
-        if (!$this->formations->contains($formation)) {
-            $this->formations[] = $formation;
-            $formation->addCourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): self
-    {
-        if ($this->formations->contains($formation)) {
-            $this->formations->removeElement($formation);
-            $formation->removeCourse($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Teacher[]
      */
     public function getTeachers(): Collection
@@ -152,18 +114,6 @@ class Cours
     public function setDiscipline(?Discipline $discipline): self
     {
         $this->discipline = $discipline;
-
-        return $this;
-    }
-
-    public function getHours(): ?int
-    {
-        return $this->hours;
-    }
-
-    public function setHours(?int $hours): self
-    {
-        $this->hours = $hours;
 
         return $this;
     }
