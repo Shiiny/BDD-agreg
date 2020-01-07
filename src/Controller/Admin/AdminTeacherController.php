@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Data\SearchData;
 use App\Entity\Teacher;
+use App\Form\SearchTeachersForm;
 use App\Form\TeacherType;
 use App\Repository\TeacherRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,8 +31,21 @@ class AdminTeacherController extends AbstractController
         $data = new SearchData();
         $data->page = $request->get('page', 1);
 
+        $formTeacher = $this->createForm(SearchTeachersForm::class, $data);
+
+        $formTeacher->handleRequest($request);
+
+        if ($formTeacher->isSubmitted()) {
+
+            return $this->render('bdd/admin/teacher/index.html.twig', [
+                'teachers' => $tr->findSearchTeacher($data),
+                'current_menu' => 'teacher',
+                'formTeacher' => $formTeacher->createView(),
+            ]);
+        }
         return $this->render('bdd/admin/teacher/index.html.twig', [
             'teachers' => $tr->findAllTeacher($data),
+            'formTeacher' => $formTeacher->createView(),
             'current_menu' => 'teacher'
         ]);
     }

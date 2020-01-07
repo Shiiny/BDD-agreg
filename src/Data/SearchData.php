@@ -4,7 +4,7 @@
 namespace App\Data;
 
 
-use App\Entity\Formation;
+use App\Entity\Concours;
 use App\Entity\Teacher;
 
 class SearchData
@@ -25,7 +25,7 @@ class SearchData
     public $teacher;
 
     /**
-     * @var null|Formation
+     * @var null|Concours
      */
     public $formation;
 

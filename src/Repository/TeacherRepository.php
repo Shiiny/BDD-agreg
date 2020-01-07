@@ -74,4 +74,27 @@ class TeacherRepository extends ServiceEntityRepository
             15
         );
     }
+
+    /**
+     * @param SearchData $search
+     * @return PaginationInterface
+     */
+    public function findSearchTeacher(SearchData $search): PaginationInterface
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t', 'c', 'd', 'cc')
+            ->leftJoin('t.cours', 'c')
+            ->leftJoin('c.concours', 'cc')
+            ->leftJoin('t.discipline', 'd')
+            ->andWhere('t.lastname LIKE :search OR t.firstname LIKE :search')
+            ->setParameter('search', '%' .$search->teacher. '%')
+            ->getQuery();
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            15
+        );
+    }
+
 }

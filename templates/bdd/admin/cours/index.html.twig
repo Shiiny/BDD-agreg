@@ -6,8 +6,24 @@
     <div class="card">
         <div class="card-body">
             <h2>Gérer les cours</h2>
-            <div class="text-right mb-3">
-                <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form_start(formCours) }}
+                    <div class="input-group">
+                        {{ form_widget(formCours.cours) }}
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text" id="basic-addon">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(formCours) }}
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-right mb-3">
+                        <a href="{{ path('admin.cours.new') }}" class="btn btn-secondary">Ajouter</a>
+                    </div>
+                </div>
             </div>
             <table class="table table-striped">
                 <thead>

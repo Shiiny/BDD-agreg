@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Data\SearchData;
 use App\Entity\Cours;
 use App\Form\CoursType;
+use App\Form\SearchCoursForm;
 use App\Repository\CoursRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,9 +28,24 @@ class AdminCoursController extends AbstractController
         $data = new SearchData();
         $data->page = $request->get('page', 1);
 
+        $formCours = $this->createForm(SearchCoursForm::class, $data);
+
+        $formCours->handleRequest($request);
+
+        if ($formCours->isSubmitted()) {
+
+            return $this->render('bdd/admin/cours/index.html.twig', [
+                'cours' => $cr->findAllSearch($data),
+                'current_menu' => 'cours',
+                'formCours' => $formCours->createView(),
+                'data' => $data->cours
+            ]);
+        }
+
         return $this->render('bdd/admin/cours/index.html.twig', [
             'cours' => $cr->findAllCourses($data),
             'current_menu' => 'cours',
+            'formCours' => $formCours->createView()
         ]);
     }
 

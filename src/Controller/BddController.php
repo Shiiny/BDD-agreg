@@ -62,8 +62,6 @@ class BddController extends AbstractController
         if ($formTeacher->isSubmitted()) {
             $teacher = $this->tr->findSearch($data);
 
-            //dd($teacher);
-
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),
                 'formCours' => $formCours->createView(),
@@ -84,7 +82,7 @@ class BddController extends AbstractController
         }
 
         if ($formCours->isSubmitted()) {
-            $courses = $this->cr->findSearch($data);
+            $courses = $this->cr->findAllSearch($data);
 
             return $this->render('bdd/index.html.twig', [
                 'formTeacher' => $formTeacher->createView(),

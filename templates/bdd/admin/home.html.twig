@@ -34,33 +34,6 @@
         </nav>
 
     {% block content %}
-        <div class="card">
-            <div class="card-body">
-                <div class="col-lg-4">
-                    <h2>Les Enseignants</h2>
-                    <p>Les 10 derniers enseignants ajoutés</p>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Discipline</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for teacher in teachers %}
-                            <tr>
-                                <td>{{ teacher.name }}</td>
-                                <td><small>{{ teacher.discipline }}</small></td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <div class="text-right mb-3">
-                        <a href="{{ path('admin.teacher.index') }}" class="btn btn-secondary">Voir tout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     {% endblock %}
     </div>
 

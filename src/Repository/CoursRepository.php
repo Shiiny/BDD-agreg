@@ -29,15 +29,6 @@ class CoursRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function findSearch(SearchData $search): array
-    {
-        return $this->findAllExist()
-            ->andWhere('c.title LIKE :search')
-            ->setParameter('search', '%' .$search->cours. '%')
-            ->getQuery()
-            ->getResult();
-    }
-
     public function findAllNoTeacher($param)
     {
         return $this->findAllExist()
@@ -61,6 +52,24 @@ class CoursRepository extends ServiceEntityRepository
           $query,
           $search->page,
           15
+        );
+    }
+
+    /**
+     * @param SearchData $search
+     * @return PaginationInterface
+     */
+    public function findAllSearch(SearchData $search): PaginationInterface
+    {
+        $query = $this->findAllExist()
+            ->andWhere('c.title LIKE :search')
+            ->setParameter('search', '%' .$search->cours. '%')
+            ->getQuery();
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            15
         );
     }
 
